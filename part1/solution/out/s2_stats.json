@@ -1,0 +1,21 @@
+{
+  "n_in": 2611,
+  "n_out": 2611,
+  "lines_before": 65995,
+  "lines_after": 27815,
+  "removed_by_rule": {
+    "면책 문구": 936,
+    "전달 머리말": 2492,
+    "답장 인용": 33032,
+    "> 인용 줄": 1408,
+    "[IMAGE]": 312
+  },
+  "forward_only_mails": 145,
+  "emptied_mails": 28,
+  "terminal_punctuation": {
+    "lines": 27815,
+    "lines_removed": 20644,
+    "mails": 2583,
+    "mails_emptied": 334
+  }
+}

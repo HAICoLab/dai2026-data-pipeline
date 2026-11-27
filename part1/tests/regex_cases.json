@@ -1,0 +1,337 @@
+[
+  {
+    "rule": "html_tag",
+    "input": "<B>Hello</B> KWARD",
+    "expect": [
+      "<B>",
+      "</B>"
+    ],
+    "note": "기본 태그"
+  },
+  {
+    "rule": "html_tag",
+    "input": "<TD width=\"557\" bgcolor=\"#ffcc33\">text</TD>",
+    "expect": [
+      "<TD width=\"557\" bgcolor=\"#ffcc33\">",
+      "</TD>"
+    ],
+    "note": "속성이 있는 태그"
+  },
+  {
+    "rule": "html_tag",
+    "input": "line one<br>line two<BR/>",
+    "expect": [
+      "<br>",
+      "<BR/>"
+    ],
+    "note": "줄바꿈 태그, 대소문자"
+  },
+  {
+    "rule": "html_tag",
+    "input": "<IMG src=\"a.gif\"\n hspace=\"0\">",
+    "expect": [
+      "<IMG src=\"a.gif\"\n hspace=\"0\">"
+    ],
+    "note": "두 줄에 걸친 태그"
+  },
+  {
+    "rule": "html_tag",
+    "input": "From: Kim Ward <kim.ward@enron.com>",
+    "expect": [],
+    "note": "이메일 주소는 태그가 아니다"
+  },
+  {
+    "rule": "html_tag",
+    "input": "see <http://www.enron.com/x> for details",
+    "expect": [],
+    "note": "꺾쇠 안의 링크는 태그가 아니다"
+  },
+  {
+    "rule": "html_tag",
+    "input": "<<Citizens contract.doc>>",
+    "expect": [],
+    "note": "첨부 파일 표시는 태그가 아니다"
+  },
+  {
+    "rule": "html_tag",
+    "input": "if price < 3.20 and volume > 5000 then call",
+    "expect": [],
+    "note": "부등호는 태그가 아니다 (<.*?> 는 여기서 틀린다)"
+  },
+  {
+    "rule": "quote_separator",
+    "input": "-----Original Message-----",
+    "expect": [
+      "-----Original Message-----"
+    ],
+    "note": "Outlook 기본형"
+  },
+  {
+    "rule": "quote_separator",
+    "input": " -----Original Message-----",
+    "expect": [
+      "-----Original Message-----"
+    ],
+    "note": "앞에 공백"
+  },
+  {
+    "rule": "quote_separator",
+    "input": "----- Original Message -----",
+    "expect": [
+      "----- Original Message -----"
+    ],
+    "note": "안쪽에 공백"
+  },
+  {
+    "rule": "quote_separator",
+    "input": "> -----Original Message-----",
+    "expect": [
+      "> -----Original Message-----"
+    ],
+    "note": "인용 표시(>)가 붙은 구분선"
+  },
+  {
+    "rule": "quote_separator",
+    "input": "Thanks,\nKim\n\n-----Original Message-----\nFrom: Foster, Chris",
+    "expect": [
+      "-----Original Message-----"
+    ],
+    "note": "여러 줄 가운데 구분선 줄만"
+  },
+  {
+    "rule": "quote_separator",
+    "input": "Please read the original message again.",
+    "expect": [],
+    "note": "문장 속의 같은 단어는 구분선이 아니다"
+  },
+  {
+    "rule": "quote_separator",
+    "input": "-----Original Appointment-----",
+    "expect": [],
+    "note": "비슷하지만 다른 구분선"
+  },
+  {
+    "rule": "forward_header",
+    "input": "---------------------- Forwarded by Kim Ward/HOU/ECT on 04/20/2001 01:49 PM ---------------------------",
+    "expect": [
+      "---------------------- Forwarded by Kim Ward/HOU/ECT on 04/20/2001 01:49 PM ---------------------------"
+    ],
+    "note": "Lotus 전달 구분선 (한 줄)"
+  },
+  {
+    "rule": "forward_header",
+    "input": "---------------------- Forwarded by Chris H Foster/HOU/ECT on 01/18/2001 \n01:17 PM ---------------------------",
+    "expect": [
+      "---------------------- Forwarded by Chris H Foster/HOU/ECT on 01/18/2001 \n01:17 PM ---------------------------"
+    ],
+    "note": "두 줄로 접힌 구분선"
+  },
+  {
+    "rule": "forward_header",
+    "input": "FYI\n---------------------- Forwarded by Kim Ward/HOU/ECT on 04/20/2001 01:49 PM ---------------------------\n\nDan J Hyvl\n03/20/2001 07:48 AM",
+    "expect": [
+      "---------------------- Forwarded by Kim Ward/HOU/ECT on 04/20/2001 01:49 PM ---------------------------"
+    ],
+    "note": "여러 줄 가운데 구분선만"
+  },
+  {
+    "rule": "forward_header",
+    "input": "> ---------------------- Forwarded by Kim Ward/HOU/ECT on 04/20/2001 01:49 PM ---------------------------",
+    "expect": [
+      "> ---------------------- Forwarded by Kim Ward/HOU/ECT on 04/20/2001 01:49 PM ---------------------------"
+    ],
+    "note": "인용 표시(>)가 붙은 구분선"
+  },
+  {
+    "rule": "forward_header",
+    "input": "This was forwarded by Kim yesterday.",
+    "expect": [],
+    "note": "문장 속의 forwarded by"
+  },
+  {
+    "rule": "disclaimer",
+    "input": "Thanks,\nKim\n\n**********************************************************************\nThis e-mail is the property of Enron Corp. and/or its relevant affiliate and\nmay contain confidential and privileged material for the sole use of the\nintended recipient (s). Thank you.\n**********************************************************************",
+    "expect": [
+      "**********************************************************************\nThis e-mail is the property of Enron Corp. and/or its relevant affiliate and\nmay contain confidential and privileged material for the sole use of the\nintended recipient (s). Thank you.\n**********************************************************************"
+    ],
+    "note": "별표 줄 사이의 면책 문구 전체"
+  },
+  {
+    "rule": "disclaimer",
+    "input": "Thanks,\nKim\n\n**********************************************************************\nThis e-mail is the property of Enron Corp. and/or its relevant affiliate and\nmay contain confidential and privileged material for the sole use of the\nintended recipient (s). Thank you.\n**********************************************************************\n\nP.S. call me",
+    "expect": [
+      "**********************************************************************\nThis e-mail is the property of Enron Corp. and/or its relevant affiliate and\nmay contain confidential and privileged material for the sole use of the\nintended recipient (s). Thank you.\n**********************************************************************"
+    ],
+    "note": "면책 문구 뒤의 글은 남긴다"
+  },
+  {
+    "rule": "disclaimer",
+    "input": "**********************************************************************\nGAS DAILY PRICES\n**********************************************************************",
+    "expect": [],
+    "note": "별표 줄 사이에 있어도 면책 문구가 아니면 남긴다"
+  },
+  {
+    "rule": "disclaimer",
+    "input": "This e-mail is the property of Enron Corp. according to Kim.",
+    "expect": [],
+    "note": "문장 속의 같은 표현"
+  },
+  {
+    "rule": "lotus_address",
+    "input": "To: Kim Ward/HOU/ECT@ECT",
+    "expect": [
+      "Kim Ward/HOU/ECT@ECT"
+    ],
+    "note": "기본형"
+  },
+  {
+    "rule": "lotus_address",
+    "input": "cc: Jeff Dasovich/NA/Enron@Enron",
+    "expect": [
+      "Jeff Dasovich/NA/Enron@Enron"
+    ],
+    "note": "소문자가 섞인 회사명"
+  },
+  {
+    "rule": "lotus_address",
+    "input": "Chris H Foster/HOU/ECT@ECT, Dan J Hyvl/HOU/ECT@ECT",
+    "expect": [
+      "Chris H Foster/HOU/ECT@ECT",
+      "Dan J Hyvl/HOU/ECT@ECT"
+    ],
+    "note": "여러 명"
+  },
+  {
+    "rule": "lotus_address",
+    "input": "Forwarded by Kim Ward/HOU/ECT on 04/20/2001",
+    "expect": [
+      "Kim Ward/HOU/ECT"
+    ],
+    "note": "@ 가 없는 형태"
+  },
+  {
+    "rule": "lotus_address",
+    "input": "James Wright/Western Region/The Bentley Company@Exchange",
+    "expect": [
+      "James Wright/Western Region/The Bentley Company@Exchange"
+    ],
+    "note": "부서 이름에 공백이 있는 형태",
+    "known_limit": true
+  },
+  {
+    "rule": "lotus_address",
+    "input": "Master Firm Purchase/Sale Agreement and/or ISDA",
+    "expect": [],
+    "note": "빗금이 있는 보통 글"
+  },
+  {
+    "rule": "lotus_address",
+    "input": "kim.ward@enron.com",
+    "expect": [],
+    "note": "보통 이메일 주소"
+  },
+  {
+    "rule": "lotus_address",
+    "input": "Please Call Kim Ward/HOU/ECT@ECT today",
+    "expect": [
+      "Kim Ward/HOU/ECT@ECT"
+    ],
+    "note": "이름 앞의 대문자 단어까지 잡힌다",
+    "known_limit": true
+  },
+  {
+    "rule": "email",
+    "input": "kim.ward@enron.com",
+    "expect": [
+      "kim.ward@enron.com"
+    ],
+    "note": "기본형"
+  },
+  {
+    "rule": "email",
+    "input": "<tbroderi@czn.com>",
+    "expect": [
+      "tbroderi@czn.com"
+    ],
+    "note": "꺾쇠 안"
+  },
+  {
+    "rule": "email",
+    "input": "write to grant_kolling@city.palo-alto.ca.us.",
+    "expect": [
+      "grant_kolling@city.palo-alto.ca.us"
+    ],
+    "note": "하위 도메인, 문장 끝의 마침표는 제외"
+  },
+  {
+    "rule": "email",
+    "input": "Kim Ward/HOU/ECT@ECT",
+    "expect": [],
+    "note": "Lotus 주소는 이메일 주소가 아니다"
+  },
+  {
+    "rule": "email",
+    "input": "call me @ 415.782.7837",
+    "expect": [],
+    "note": "혼자 있는 @"
+  },
+  {
+    "rule": "phone",
+    "input": "713-853-0685",
+    "expect": [
+      "713-853-0685"
+    ],
+    "note": "기본형"
+  },
+  {
+    "rule": "phone",
+    "input": "(713) 853-0685",
+    "expect": [
+      "(713) 853-0685"
+    ],
+    "note": "괄호"
+  },
+  {
+    "rule": "phone",
+    "input": "(713)853-0685",
+    "expect": [
+      "(713)853-0685"
+    ],
+    "note": "괄호 뒤 공백 없음"
+  },
+  {
+    "rule": "phone",
+    "input": "call me @ 415.782.7837",
+    "expect": [
+      "415.782.7837"
+    ],
+    "note": "마침표 구분"
+  },
+  {
+    "rule": "phone",
+    "input": "713/853-0685",
+    "expect": [
+      "713/853-0685"
+    ],
+    "note": "빗금 구분"
+  },
+  {
+    "rule": "phone",
+    "input": "on 04/20/2001 01:49 PM",
+    "expect": [],
+    "note": "날짜와 시각"
+  },
+  {
+    "rule": "phone",
+    "input": "deal 123-456-7890123",
+    "expect": [],
+    "note": "더 긴 숫자의 일부"
+  },
+  {
+    "rule": "phone",
+    "input": "x3-0685 or 853-0685",
+    "expect": [],
+    "note": "내선번호와 7자리 번호는 정규식만으로 구분하기 어렵다",
+    "known_limit": true
+  }
+]

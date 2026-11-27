@@ -221,3 +221,9 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# 교수자 전용 준비 자료 (학생에게 공개하지 않음)
+_instructor/
+
+# 학생 실습 결과물 (정답은 part*/solution/out/에 있음)
+/part*/out/

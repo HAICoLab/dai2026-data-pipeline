@@ -1,0 +1,11 @@
+{
+  "n_in": 2611,
+  "qp_mails": 99,
+  "html_mails": 26,
+  "html_tags": 2988,
+  "encoded_subjects": 11,
+  "no_date": 0,
+  "naive_qp_wrong_mails": 38,
+  "naive_qp_wrong_hits": 209,
+  "n_out": 2611
+}
